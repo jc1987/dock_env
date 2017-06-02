@@ -1,19 +1,26 @@
 version: '2'
 services:
-  mysql:
-    build: ./mysql
-    ports:
-     - '9990:3306'
-    environment:
-      MYSQL_ROOT_PASSWORD: pass
+  db:
+    image: mysql:5.7
     volumes:
-      - db:/var/lib/mysql
+      - db_data:/var/lib/mysql
+    restart: always
+    ports:
+      - "11112:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: results
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+
   php:
     build: ./php
     ports:
       - '8910:80'
     volumes:
-      - ./html:/var/www/html
+      - /Users/jchai/www/revelist:/var/www/html
       - ./apache:/etc/apache2/sites-available
+
 volumes:
-  db:
+  db_data:
+  
