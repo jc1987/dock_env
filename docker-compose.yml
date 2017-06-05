@@ -21,6 +21,11 @@ services:
       - /Users/jchai/www/revelist:/var/www/html
       - ./apache:/etc/apache2/sites-available
 
+  memcached:
+    image: memcached
+    ports:
+      - "11211:11211"
+
 volumes:
   db_data:
   
